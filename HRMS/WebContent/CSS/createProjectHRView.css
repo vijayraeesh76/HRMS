@@ -1,0 +1,23 @@
+#projectCreationDiv{
+	margin: 3% 0% 5px 36%;
+	width:415px;
+}
+
+#submitDiv{
+	float: right;
+}
+
+#msgDiv{
+	margin: 3% 0% 5px 36%;
+	width:355px;
+}
+
+.projectLeft{
+	margin: 13px 20px 0 0;
+}
+
+.projectInputDiv{
+	margin: 12px 0 0 0;
+	float:left;
+}
+

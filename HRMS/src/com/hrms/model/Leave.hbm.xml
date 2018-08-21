@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 5, 2018 1:27:09 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hrms.model.LeaveBean" table="Leave_Table">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="User_Name" not-null="true"/>
+        </property>
+        <property name="empID" type="java.lang.String">
+            <column name="Emp_ID" not-null="true"/>
+        </property>
+        <property name="leaveDate" type="java.time.LocalDate">
+            <column name="Leave_Date" not-null="true"/>
+        </property>
+        <property name="leaveStatus" type="java.lang.String">
+            <column name="Leave_Status" not-null="true"/>
+        </property>
+        <property name="reason" type="java.lang.String">
+            <column name="Reason" not-null="true"/>
+        </property>
+        <property name="supervisorComment" type="java.lang.String">
+            <column name="Supervisor_Comment" />
+        </property>
+        <property name="superiorEmpID" type="java.lang.String">
+            <column name="Superior_Emp_ID" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

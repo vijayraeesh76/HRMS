@@ -1,0 +1,34 @@
+#updateDiv{
+	float:left;
+	border-style:solid;
+	border-color: #184982
+	margin:30px 0 10px 40%;
+	width:180px;
+	padding: 10px 10px 10px 10px;
+}
+
+#updateDiv input{
+	width:100px;
+}
+
+.updateElements{
+	float:left;
+	margin: 0 0 10px 0;
+}
+
+.updatetext{
+	float:left;
+	width:75px;
+}
+
+.inputDiv{
+	float:left;
+}
+
+.updateElements #submit{
+	width:60px;
+}
+
+#submitDiv{
+	margin:0 0 0 33%;
+}

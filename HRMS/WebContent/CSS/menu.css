@@ -1,0 +1,36 @@
+#menu{
+	float:left;
+	background-color: #184982; 
+    color:#FEFEFE;
+    font-size:large;
+    width:100%
+}
+
+#leftMenu{
+	float:left;
+}
+
+#rightMenu{
+	float:right;
+}
+
+.leftMenuItems{
+	float:left;
+	padding:10px;
+	border-right-style:solid;
+}
+
+.rightMenuItems{
+	float:right;
+	padding:10px;
+	border-left-style:solid;
+}
+
+.menuItems{
+	padding:10px;
+}
+
+.menuItems:hover{
+	background-color:#FEFEFE;
+	color:#184982;
+}

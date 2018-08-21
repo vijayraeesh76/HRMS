@@ -1,0 +1,26 @@
+#leavesDiv{
+	margin: 5% 0% 5px 9%;
+	width: 1060px;
+}
+
+#msgDiv{
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	margin: 5% 30% 5px 24%;
+	padding: 5px 5px 5px 5px;
+	width: 670px;
+	text-align: center;
+}
+
+.reasonTD{
+	width:100px;
+}
+
+#leavesTable{
+	border-style:none;
+}
+
+textArea{
+	height:40px;
+}

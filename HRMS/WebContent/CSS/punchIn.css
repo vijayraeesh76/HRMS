@@ -1,0 +1,92 @@
+#punchInDiv{
+	border-style: solid;
+	border-color: #184982;
+	background-color: #184982;
+	float: left;
+	padding: 5px 5px 5px 5px;
+	height: 30%;
+	width: 28%;
+	margin:34% 0 0  0;
+}
+
+#timerDiv{
+	float:left;
+	clear:both;
+	background-color:#FEFEFE;
+}
+
+.timerDivs{
+	float:left;
+	border-style: solid;
+	border-color: #184982;
+	margin:3px;
+	width:140px;
+}
+
+#dateDiv{
+	float:left;
+	padding: 3px 3px 3px 28px;
+}
+
+.punchButtons{
+	border-style: solid;
+	border-color: #184982;
+	padding:3px;
+	margin:3px;
+	text-align:center;
+	cursor: pointer;
+}
+
+.pMessages{
+	border-style: solid;
+	border-color: #184982;
+	padding:3px;
+	margin:3px;
+	text-align:center;
+}
+
+.unstyled::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+ 
+ input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#datepicker{
+	width:92px;
+}
+
+.punchButtons:hover{
+	color:#FEFEFE;
+	background-color:#184982;
+}
+
+#contentDiv{
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	margin: 5% 0% 5px 28%;
+	padding: 5px 5px 5px 5px;
+	width: 550px;
+	background-color: #FEFEFE;
+}
+
+#punchRecordsDiv{
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	margin: 0 0px 0 5px;
+	padding: 0 5px 5px 5px;
+	height:500px;
+	width:65%;
+}
+
+.punchRecords{
+	padding:5px;
+	background-Color: #184982;
+	color: #FEFEFE;
+	margin: 5px 0 0 0;
+}

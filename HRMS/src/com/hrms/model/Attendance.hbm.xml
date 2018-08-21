@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2018 6:47:46 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hrms.model.Attendance" table="ATTENDANCE">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="empID" type="java.lang.String">
+            <column name="Emp_ID" />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="USER_NAME" />
+        </property>
+        <property name="attendance" type="java.lang.String">
+            <column name="ATTENDANCE" />
+        </property>
+        <property name="attendanceDate" type="java.time.LocalDate">
+            <column name="ATTENDANCE_DATE" />
+        </property>
+        <property name="workHours" type="float">
+            <column name="Work_Hours" />
+        </property>
+        <property name="workHoursString" type="java.lang.String">
+            <column name="Work_Hours_String" />
+        </property>
+    </class>
+</hibernate-mapping>

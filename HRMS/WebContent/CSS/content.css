@@ -1,0 +1,91 @@
+.contentDiv {
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	padding: 25px;
+	background-color: #FEFEFE;
+}
+
+.hasInputDiv:hover{
+	background-color: #184982 !important;
+	color: #FEFEFE !important;
+}
+
+.contentFirstChild {
+	padding: 10px;
+	float: left;
+	width: 96%;
+}
+
+.contentFirstChild:hover {
+	background-color: #184982 !important;
+	color: #FEFEFE !important;
+}
+
+.contentFirstChild:hover .contentSecondChilda {
+	background-color: #FEFEFE !important;
+	color:#184982 !important;
+}
+
+
+.contentSecondChilda {
+	background-Color: #184982;
+	color: #FEFEFE;
+	margin: 0 20px 0 0;
+	width: 45%;
+	float: left;
+	padding: 3px;
+	height:24px;
+}
+
+.contentSecondChildb {
+	width: 45%;
+	padding: 3px;
+	float: left;
+}
+
+.submit {
+	font-size: medium;
+	font-weight: bold;
+	background-color: #184982;
+	color: #FEFEFE;
+	border-radius: 12px;
+	height: 30px;
+	border: none;
+}
+
+.submit:hover {
+	background-color: #FEFEFE;
+	color: #184982;
+	border-style: solid;
+	border-color: #184982;
+}
+
+input, select, textArea, #datepicker {
+	width: 100%;
+	height: 24px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.msgDiv{
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.submitDiv{
+	padding: 3px 3px 3px 3px;
+}
+
+span{
+	float: left;
+	padding: 3px 0 0 0;
+}
+
+.multiselect{
+	height:50px;
+}

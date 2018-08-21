@@ -1,0 +1,14 @@
+#leaves{
+	float:left;
+	border-style:solid;
+	border-color: #184982;
+	margin: 5% 0% 5px 27%;
+	padding: 5px 5px 5px 5px;
+	height: 30%;
+	width: 600px;
+	font-family:Arial;
+}
+
+.leaveSupervisors{
+	width: 165px;
+}

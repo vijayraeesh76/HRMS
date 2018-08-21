@@ -1,0 +1,17 @@
+#welcomeDiv{
+	float:left;
+	color:#FEFEFE;
+	width:100%;
+	padding: 0px 0px 5px 0px;
+}
+
+#welcomeImageDiv{
+	float:left;
+	width:100%;
+}
+
+#welcomeImage{
+	float:left;
+	object-fit:cover;
+	width:100%;
+}

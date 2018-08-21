@@ -1,0 +1,91 @@
+#applyLeave{
+	margin: 5% 0 5px 36%;
+	width: 335px;
+}
+
+
+.contentChild1{
+	width:100%;
+	float:left;
+	padding:15px 5px 15px 5px;
+}
+
+#datePicker{
+	width:125px;
+}
+
+#submit{
+	margin: 0% 43% 0px 0%;
+	float: right;
+	width:auto;
+}
+
+#applyLeaveMsg{
+	margin: 5% 0% 5px 36%;
+	width: 335px;
+}
+
+#supervisorText{
+	width:40%;
+}
+
+#supervisorSelectDiv{
+	width:60%;
+}
+
+.inputs{
+	width: 150px;
+}
+
+.calendarInput {
+	width: 100px;
+}
+
+.contentChild2{
+	padding:5px;
+	float:left;
+}
+
+.contentChild3{
+	padding:0px;
+	float:left;
+}
+
+#reasonTextArea{
+	width:100%;
+	height: 50px;
+}
+
+.leftContent{
+	width:50%;
+	padding:0px;
+}
+
+.rightContent{
+	float: right;
+	width:50%;
+	padding:0px;
+}
+
+#superiorSelect{
+	float:right;
+	width:100%
+}
+
+#toDateDiv{
+	float:right;
+}
+
+
+#toDateContentDiv{
+	width:45%;
+}
+
+#fromDateContentDiv{
+	width:55%;
+}
+
+#fromDateInputDiv{
+	float:right;
+	padding: 0 15px 0 0;
+}

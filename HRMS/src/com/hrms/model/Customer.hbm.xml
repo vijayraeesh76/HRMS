@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 5, 2018 11:22:59 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hrms.model.Customer" table="CUSTOMER">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="java.lang.String">
+            <column name="First_Name" />
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="Last_Name" />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="User_Name" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="Password" />
+        </property>
+        <property name="salt" type="java.lang.String">
+            <column name="Salt" />
+        </property>
+    </class>
+</hibernate-mapping>

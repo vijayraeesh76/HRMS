@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 17, 2018 10:27:10 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hrms.model.Project" table="PROJECT">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="projectName" type="java.lang.String">
+            <column name="PROJECT_NAME" />
+        </property>
+        <set name="employees" table="EMPLOYEE" fetch="select">
+            <key>
+                <column name="Project_Id" not-null="false"/>
+            </key>
+            <one-to-many class="com.hrms.model.Employee" />
+        </set>
+    </class>
+</hibernate-mapping>

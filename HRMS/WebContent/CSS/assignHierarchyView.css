@@ -1,0 +1,22 @@
+#hierarchyContent{
+	margin: 5% 0 5px 38%;
+	width: 350px;
+}
+
+#submitDiv{
+	float:right;
+}
+
+#msgDiv{
+	margin: 5% 0% 5px 38%;
+	width: 330px;
+}
+
+.contentLeft{
+	margin: 13px 20px 0 0;
+}
+
+.selectInput{
+	margin: 12px 0 0 0;
+	float:left;
+}

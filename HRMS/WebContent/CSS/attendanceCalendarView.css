@@ -1,0 +1,44 @@
+#calendarDiv{
+	border-style: solid;
+	border-color: #184982;
+	float: left;
+	margin: 5% 30% 5px 38%;
+	padding: 5px 5px 5px 5px;
+	height: 30%;
+	width: 280px;
+}
+
+.present a{
+	 background-color: #3794f2 !important;
+    color: #ffffff !important;
+}
+
+.approved a{
+	 background-color: #5FBA7D !important;
+    color: #ffffff !important;
+}
+
+.rejected a{
+	 background-color: #f44242 !important;
+    color: #ffffff !important;
+}
+
+.waiting a{
+	 background-color: #f1f441 !important;
+    color: #ffffff !important;
+}
+
+.pending a{
+	 background-color: #2ceff9 !important;
+    color: #ffffff !important;
+}
+
+.holiday a{
+	 background-color: #ffc130 !important;
+    color: #ffffff !important;
+}
+
+.lossOfPay a{
+	 background-color: #aa2525 !important;
+    color: #ffffff !important;
+}

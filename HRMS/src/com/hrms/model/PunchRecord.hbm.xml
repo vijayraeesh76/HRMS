@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2018 9:53:59 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.hrms.model.PunchRecord"
+		table="punch_record">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="identity" />
+		</id>
+		<property name="empID" type="java.lang.String">
+			<column name="Emp_ID" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="User_Name" />
+		</property>
+		<property name="date" type="java.time.LocalDate">
+			<column name="PUNCH_DATE" />
+		</property>
+		<set name="punches" table="punch_time" 
+				fetch="select">
+			<key>
+				<column name="Punch_Record_Id" not-null="false"></column>
+			</key>
+			<one-to-many class="com.hrms.model.PunchTime"/>
+		</set>
+	</class>
+</hibernate-mapping>

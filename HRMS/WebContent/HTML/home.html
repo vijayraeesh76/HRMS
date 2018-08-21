@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/DosaCorner/CSS/home.css">
+<script type="text/javascript" src="/DosaCorner/JS/home.js"></script>
+<meta charset="ISO-8859-1">
+<title>Dosa Corner</title>
+</head>
+<body>
+
+	<div id="welcomeDiv">
+		<div id="welcomeDivImage">
+			<img id="welcomeImage" alt=""
+				src="/DosaCorner/Images/welcomeImageT.jpg">
+		</div>
+	</div>
+	<!-- <div id="welcomeMessageContainer">
+		<div class="welcomeDivChild" id="welcomeDivMessage">Dosa Corner</div>
+	</div> -->
+	<div id="menu">
+		<div id="leftMenu">
+			<div class="leftMenuItems" id="dosa" onclick="window.location='dosas.html'">
+				Dosa Varieties <span id="dosaVarieties">Browse through our
+					delicious dosas!</span>
+			</div>
+			<div class="leftMenuItems" id="store">
+				Store Locator<span id="storeLocator">Browse through all our stores</span>
+			</div>
+			<div class="leftMenuItems" id="contactUs">Contact Us</div>
+		</div>
+		<div id="rightMenu">
+			<div class="rightMenuItems" onclick="redirectSignIn()">SignIn</div>
+			<div class="rightMenuItems" onclick="window.location='register.html'">Register</div>
+		</div>
+	</div>
+	<div id="offers">
+		<div id="adsList">
+			<div class="ad" id="ad1"> 
+				<img class="adImage" alt=""
+				src="/DosaCorner/Images/Ads/Dosa-Festival.jpg">
+			</div>
+			<div class="ad" id="ad2">
+				<img class="adImage" alt=""
+				src="/DosaCorner/Images/Ads/Dosa-Varieties.jpg">
+			</div>
+			<div class="ad" id="ad3">
+				<img class="adImage" alt=""
+				src="/DosaCorner/Images/Ads/Navratri-Special.jpg">
+			</div>
+		</div>
+		<div id="scroller">
+			<div class="scrollButton" onclick="scroller('ad1')">
+				<img alt=""
+				src="/DosaCorner/Images/Icons/scroll.png">
+			</div>
+			<div class="scrollButton" onclick="scroller('ad2')">
+				<img alt=""
+				src="/DosaCorner/Images/Icons/scroll.png">
+			</div>
+			<div class="scrollButton" id="lastScroller" onclick="scroller('ad3')">
+				<img alt=""
+				src="/DosaCorner/Images/Icons/scroll.png">
+			</div>
+		</div>
+	</div>
+	<div id="content">
+		<div class="contents">
+			<div class="contentIcon">
+				<img class="contentImage" alt=""
+				src="/DosaCorner/Images/Content/menu.png">
+			</div>
+			<div class="contentText">
+				<div class="contentText1">Our Menu</div>
+				<div class="contentText2">Explore our range of mouth watering dosas</div>
+			</div>
+			<div class="contentButton">
+				<input type="button" value="Explore Dosas">
+			</div>
+		</div>
+		<div class="contents contentsEven">
+			<div class="contentIcon">
+				<img class="contentImage" alt=""
+				src="/DosaCorner/Images/Content/store Finder.png">
+			</div>
+			<div class="contentText">
+				<div class="contentText1">Your Nearest Store</div>
+				<div class="contentText2">Find a store near you</div>
+			</div>
+			<div class="contentButton">
+				<input type="button" value="Store Locator">
+			</div>
+		</div>
+		<div class="contents">
+			<div class="contentIcon">
+				<img class="contentImage" alt=""
+				src="/DosaCorner/Images/Content/birthday.png">
+			</div>
+			<div class="contentText">
+				<div class="contentText1">Birthday Party</div>
+				<div class="contentText2">Celebrate birthday's with DosaCorner</div>
+			</div>
+			<div class="contentButton">
+				<input type="button" value="Book Now">
+			</div>
+		</div>
+		<div class="contents contentsEven">
+			<div class="contentIcon">
+				<img class="contentImage" alt=""
+				src="/DosaCorner/Images/Content/catering.png">
+			</div>
+			<div class="contentText">
+				<div class="contentText1">Catering</div>
+				<div class="contentText2">Live kitchen for weddings/corporate events</div>
+			</div>
+			<div class="contentButton">
+				<input type="button" value="Book Now">
+			</div>
+		</div>
+	</div>
+	<div id="footerDiv">
+		<div class="footerItem">BLOG</div>
+		<div class="footerItem">INVESTORS</div>
+		<div class="footerItem">FEEDBACK</div>
+		<div class="footerItem">ADS</div>
+		<div class="footerItem footerRightItems">FACEBOOK</div>
+		<div class="footerItem footerRightItems">TWITTER</div>
+	</div>
+</body>
+</html>
