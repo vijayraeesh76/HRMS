@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="/HRMS/CSS/body.css">
 <link rel="stylesheet" href="/HRMS/CSS/welcomeDiv.css">
 <link rel="stylesheet" href="/HRMS/CSS/menu.css">
-<link rel="stylesheet" href="/HRMS/CSS/home.css">
 <script type="text/javascript" src="/HRMS/JS/home.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="ISO-8859-1">
