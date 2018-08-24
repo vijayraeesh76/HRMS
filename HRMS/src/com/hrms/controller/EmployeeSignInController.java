@@ -6,9 +6,11 @@ import java.util.Arrays;
 import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
@@ -76,6 +78,15 @@ public class EmployeeSignInController extends HttpServlet {
 		}
 
 		String designation = user.getDesignation();
+
+		// Check whether Cookies are enabled
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			// cookies enabled
+		}else {
+			throw new RuntimeException("This site uses Cookies. Please enable cookies");
+		}
+
 		request.getSession().setAttribute("firstName", user.getFirstName());
 		request.getSession().setAttribute("lastName", user.getLastName());
 		request.getSession().setAttribute("userName", user.getUserName());
@@ -84,19 +95,16 @@ public class EmployeeSignInController extends HttpServlet {
 		// Set PunchRecords in session
 		/*
 		 * String hql1 =
-		 * "FROM PunchRecord u where u.userName=:userName and u.date=:date";
-		 * Query query1 = session.createQuery(hql1);
-		 * query1.setParameter("userName", userName);
-		 * query1.setParameter("date", LocalDate.now()); List<PunchRecord>
+		 * "FROM PunchRecord u where u.userName=:userName and u.date=:date"; Query
+		 * query1 = session.createQuery(hql1); query1.setParameter("userName",
+		 * userName); query1.setParameter("date", LocalDate.now()); List<PunchRecord>
 		 * punchRecords = (List<PunchRecord>) query1.getResultList();
 		 * 
 		 * if (punchRecords != null) { if (punchRecords.isEmpty()) {
-		 * request.getSession().setAttribute("punchRecordPresent", "FALSE"); }
-		 * else if (punchRecords.size() == 1) {
-		 * request.getSession().setAttribute("punchRecord",
-		 * punchRecords.get(0));
-		 * request.getSession().setAttribute("punchRecordPresent", "TRUE"); }
-		 * else if (punchRecords.size() > 1) { throw new
+		 * request.getSession().setAttribute("punchRecordPresent", "FALSE"); } else if
+		 * (punchRecords.size() == 1) { request.getSession().setAttribute("punchRecord",
+		 * punchRecords.get(0)); request.getSession().setAttribute("punchRecordPresent",
+		 * "TRUE"); } else if (punchRecords.size() > 1) { throw new
 		 * RuntimeException("More than one PunchRecord found for user for a given day"
 		 * ); } } else { request.getSession().setAttribute("punchRecordPresent",
 		 * "FALSE"); }
