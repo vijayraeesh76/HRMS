@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/HRMS/CSS/body.css">
 <link rel="stylesheet" href="/HRMS/CSS/welcomeDiv.css">
 <link rel="stylesheet" href="/HRMS/CSS/menu.css">
-<link rel="stylesheet" href="/HRMS/CSS/attendanceManagement.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Attendance Management</title>
 </head>

@@ -1,48 +1,33 @@
-package com.hrms.controller;
+package com.hrms.controller.signIn;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import javax.persistence.Query;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.model.Employee;
 import com.hrms.utilities.Constants;
 import com.hrms.utilities.HashPassword;
 
-/**
- * Servlet implementation class EmployeeSignIn
- */
-@WebServlet("/employeeSignIn.do")
-public class EmployeeSignInController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Controller
+public class SignInControllerImpl implements SignInController{
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public EmployeeSignInController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@RequestMapping("/employeeSignIn.do")
+	@Override
+	public ResponseEntity signIn(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		Employee user = null;
@@ -127,17 +112,18 @@ public class EmployeeSignInController extends HttpServlet {
 			request.getSession().setAttribute("isSysAdmin", "TRUE");
 		}
 
-		response.getWriter().append("Status:Success");
+		String status = "Status:Success";
+		return ResponseEntity.ok(status);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	@RequestMapping("/signOut.do")
+	@Override
+	public ModelAndView signOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ModelAndView model = new ModelAndView();
+		request.getSession().invalidate();
+		model.setViewName("home");
+		
+		return model;
 	}
 
 }

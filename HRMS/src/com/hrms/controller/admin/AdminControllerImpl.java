@@ -1,13 +1,10 @@
-package com.hrms.controller;
+package com.hrms.controller.admin;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
 import javax.persistence.Query;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,32 +13,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.hrms.model.Employee;
 import com.hrms.model.ResponseModel;
 import com.hrms.utilities.HashPassword;
 
-/**
- * Servlet implementation class AdminRegister
- */
-@WebServlet("/adminRegister.do")
-public class AdminRegisterController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminRegisterController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+@Controller
+public class AdminControllerImpl implements AdminController{
+	
+	@Override
+	@RequestMapping("/adminRegister.do")
+	public ResponseEntity adminRegister(HttpServletRequest request,
+		HttpServletResponse response) throws IOException{
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		ResponseModel responseStatus = new ResponseModel();
 		String status = null;
 		String responseMessage = null;
@@ -105,15 +93,7 @@ public class AdminRegisterController extends HttpServlet {
 		responseStatus.setStatus(status);
 		responseStatus.setMessage(responseMessage);
 		String jsonString = new Gson().toJson(responseStatus);
-		response.getWriter().append(jsonString);
+		
+		return ResponseEntity.ok(jsonString);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
