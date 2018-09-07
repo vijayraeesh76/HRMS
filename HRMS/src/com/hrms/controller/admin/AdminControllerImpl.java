@@ -5,21 +5,19 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.hrms.model.Employee;
-import com.hrms.model.ResponseModel;
 import com.hrms.utilities.HashPassword;
 
 @Controller
@@ -27,20 +25,33 @@ public class AdminControllerImpl implements AdminController{
 	
 	@Override
 	@RequestMapping("/adminRegister.do")
-	public ResponseEntity adminRegister(HttpServletRequest request,
-		HttpServletResponse response) throws IOException{
+	public ModelAndView adminRegister(Employee employee) throws IOException{
 
-		ResponseModel responseStatus = new ResponseModel();
+		ModelAndView model = new ModelAndView();
+		
+		// AJAX
+		/*ResponseModel responseStatus = new ResponseModel();
 		String status = null;
-		String responseMessage = null;
+		String responseMessage = null;*/
 		
 		try {
-			String firstName = request.getParameter("firstname");
-			String lastName = request.getParameter("lastname");
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			String designation = request.getParameter("designation");
-			String doj = request.getParameter("doj");
+			String firstName = employee.getFirstName();
+			String lastName = employee.getLastName();
+			String userName = employee.getUserName();
+			String password = employee.getPassword();
+			String designation = employee.getDesignation();
+			String doj = employee.getDojString();
+			
+			if(StringUtils.isBlank(firstName) || StringUtils.isBlank(lastName) 
+					|| StringUtils.isBlank(userName) || StringUtils.isBlank(password) 
+					|| StringUtils.isBlank(designation) || null==doj) {
+				String errMsg = "Required request param not found";
+				
+				System.out.println(errMsg);
+				throw new RuntimeException(errMsg);
+			}
+			
+			
 			int employeeCount = 0;
 			String passwordHash = null;
 			String saltHash = null;
@@ -74,7 +85,7 @@ public class AdminControllerImpl implements AdminController{
 			Employee user = new Employee();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
-			user.setUserName(username);
+			user.setUserName(userName);
 			user.setPassword(passwordHash);
 			user.setDesignation(designation);
 			user.setDoj(LocalDate.parse(doj));
@@ -84,16 +95,30 @@ public class AdminControllerImpl implements AdminController{
 			session.save(user);
 			tr.commit();
 			
-			status = "Success";
+			//status = "Success";
 		}catch(Exception e) {
-			status="Error";
-			responseMessage=ExceptionUtils.getRootCauseMessage(e);
+			//status="Error";
+			//responseMessage=ExceptionUtils.getRootCauseMessage(e);
+			
+			System.out.println("Exception Root Cause : " +ExceptionUtils.getRootCauseMessage(e));
+			
+			throw e;
 		}
 		
-		responseStatus.setStatus(status);
+		// AJAX
+		/*responseStatus.setStatus(status);
 		responseStatus.setMessage(responseMessage);
-		String jsonString = new Gson().toJson(responseStatus);
+		String jsonString = new Gson().toJson(responseStatus);*/
 		
-		return ResponseEntity.ok(jsonString);
+		model.setViewName("home");
+		
+		return model;
+	}
+
+	@Override
+	@RequestMapping("/adminRegisterView.do")
+	public ModelAndView adminRegisterView(@ModelAttribute("employee") Employee employee) throws IOException {
+		ModelAndView model = new ModelAndView("adminRegister");
+		return model;
 	}
 }

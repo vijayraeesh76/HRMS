@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Transient;
+
 public class Employee implements Serializable {
 
 	/**
@@ -17,12 +19,22 @@ public class Employee implements Serializable {
 	private String userName;
 	private String password;
 	private String designation;
+	@Transient
+	private String dojString;
 	private LocalDate doj;
 	private String empID;
 	private String salt;
 	private Project project;
 	private Set<Superior> superiors;
 	private Set<Subordinate> subordinates;
+
+	public String getDojString() {
+		return dojString;
+	}
+
+	public void setDojString(String dojString) {
+		this.dojString = dojString;
+	}
 
 	public Set<Superior> getSuperiors() {
 		return superiors;
