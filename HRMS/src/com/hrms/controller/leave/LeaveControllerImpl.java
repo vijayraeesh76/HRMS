@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.hrms.manager.leave.LeaveManager;
 import com.hrms.model.Employee;
 import com.hrms.model.LeaveBean;
 import com.hrms.model.LeaveStatusEmployee;
@@ -33,8 +34,18 @@ import com.hrms.model.LeavesHRView;
 import com.hrms.model.ResponseModel;
 import com.hrms.model.Superior;
 
-@Controller
+@RequestMapping("/leave")
 public class LeaveControllerImpl implements LeaveController {
+
+	private LeaveManager leaveManager;
+
+	public LeaveManager getLeaveManager() {
+		return leaveManager;
+	}
+
+	public void setLeaveManager(LeaveManager leaveManager) {
+		this.leaveManager = leaveManager;
+	}
 
 	@RequestMapping("/leaveApplication.do")
 	@Override
@@ -65,12 +76,6 @@ public class LeaveControllerImpl implements LeaveController {
 
 			List<LeaveBean> existingLeaves = null;
 
-			Configuration cfg = new Configuration();
-			cfg = cfg.configure();
-			SessionFactory sf = cfg.buildSessionFactory();
-			Session session = sf.openSession();
-			Transaction tr = session.beginTransaction();
-
 			// Check whether from date and to date are same
 			Period period = fDate.until(tDate);
 			Long days = period.get(ChronoUnit.DAYS);
@@ -82,22 +87,15 @@ public class LeaveControllerImpl implements LeaveController {
 
 			// Check whether leaves are overlapping
 			if (leaveDaysSame) {
-				String hql = "FROM LeaveBean u where u.empID=:empID and leaveDate=:leaveDate";
-				Query query = session.createQuery(hql);
-				query.setParameter("empID", empID);
-				query.setParameter("leaveDate", fDate);
-				existingLeaves = query.getResultList();
+				
+				existingLeaves = leaveManager.getLeavesByEmpIDAndLeaveDate(empID, fDate);
 
 				if (existingLeaves != null && !existingLeaves.isEmpty()) {
 					leavesOverlapping = Boolean.TRUE;
 				}
 			} else {
-				String hql = "FROM LeaveBean u where u.empID=:empID and u.leaveDate BETWEEN :fDate AND :tDate";
-				Query query = session.createQuery(hql);
-				query.setParameter("empID", empID);
-				query.setParameter("fDate", fDate);
-				query.setParameter("tDate", tDate);
-				existingLeaves = query.getResultList();
+
+				existingLeaves = leaveManager.getLeavesByEmpIDAndLeaveDateRange(empID, fDate, tDate);
 
 				if (existingLeaves != null && !existingLeaves.isEmpty()) {
 					leavesOverlapping = Boolean.TRUE;
@@ -107,6 +105,7 @@ public class LeaveControllerImpl implements LeaveController {
 			// Generate Leaves and insert in DB
 			if (!leavesOverlapping) {
 				if (leaveDaysSame) {
+
 					LeaveBean newLeave = new LeaveBean();
 					newLeave.setEmpID(empID);
 					newLeave.setLeaveDate(fDate);
@@ -115,7 +114,7 @@ public class LeaveControllerImpl implements LeaveController {
 					newLeave.setReason(reason);
 					newLeave.setSuperiorEmpID(supervisor);
 
-					session.save(newLeave);
+					leaveManager.saveLeave(newLeave);
 				} else {
 					long leaveLength = ChronoUnit.DAYS.between(fDate, tDate);
 					for (int i = 0; i <= leaveLength; i++) {
@@ -129,11 +128,9 @@ public class LeaveControllerImpl implements LeaveController {
 						newLeave.setReason(reason);
 						newLeave.setSuperiorEmpID(supervisor);
 
-						session.save(newLeave);
+						leaveManager.saveLeave(newLeave);
 					}
 				}
-
-				tr.commit();
 
 				resStatusStr = "Success";
 
@@ -266,7 +263,7 @@ public class LeaveControllerImpl implements LeaveController {
 	public ModelAndView updateLeaveStatusView(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		ModelAndView model = new ModelAndView();
-		
+
 		HttpSession session = request.getSession();
 		String userName = null;
 		List<LeaveBean> pendingLeaves = null;
@@ -285,12 +282,12 @@ public class LeaveControllerImpl implements LeaveController {
 		int eligibleLeavesPerMonth = 1;
 		List<LeavesHRView> leavesForHR = null;
 		String empID = (String) request.getSession().getAttribute("empID");
-		
+
 		// redirect to login if session does not have empID
-		if(StringUtils.isBlank(empID)){
+		if (StringUtils.isBlank(empID)) {
 			response.sendRedirect("employeeSignIn");
 		}
-		
+
 		// Hibernate Configurations
 		Configuration cfg = new Configuration();
 		cfg = cfg.configure();
@@ -301,7 +298,7 @@ public class LeaveControllerImpl implements LeaveController {
 		// Get pending leaves
 		String hql = "FROM LeaveBean l where l.leaveStatus in (:status) and l.superiorEmpID=:supEmpID order by date(leaveDate) asc";
 		Query query = hibSession.createQuery(hql);
-		query.setParameterList("status", new String[] {"PENDING","WAITING"});
+		query.setParameterList("status", new String[] { "PENDING", "WAITING" });
 		query.setParameter("supEmpID", empID);
 		pendingLeaves = (List<LeaveBean>) query.getResultList();
 
@@ -338,7 +335,7 @@ public class LeaveControllerImpl implements LeaveController {
 
 			if (monthsFromJoining >= 3) {
 				leaveEligibility = Boolean.TRUE;
-			}else{
+			} else {
 				leaveEligibility = Boolean.FALSE;
 			}
 
@@ -361,12 +358,12 @@ public class LeaveControllerImpl implements LeaveController {
 				}
 
 				eligibleLeaveDays = eligibleLeavesPerMonth - approvedLeaves;
-			}else{
-				eligibleLeaveDays=0;
+			} else {
+				eligibleLeaveDays = 0;
 			}
-			
-			if(eligibleLeaveDays<0) {
-				eligibleLeaveDays=0;
+
+			if (eligibleLeaveDays < 0) {
+				eligibleLeaveDays = 0;
 			}
 
 			// populate LeavesHRView model for HR convenient view
@@ -380,13 +377,12 @@ public class LeaveControllerImpl implements LeaveController {
 			leaveHR.setComment(pendingLeave.getSupervisorComment());
 
 			leavesForHR.add(leaveHR);
-		}	
-		
-		
+		}
+
 		request.getSession().setAttribute("leaves", leavesForHR);
 
 		model.setViewName("updateLeaveStatusView");
-		
+
 		return model;
 	}
 
@@ -397,7 +393,7 @@ public class LeaveControllerImpl implements LeaveController {
 		ResponseModel resModel = new ResponseModel();
 		String resStatus = null;
 		String resMess = null;
-		try{
+		try {
 			String firstName = request.getParameter("firstName");
 			String empID = request.getParameter("empID");
 			String leaveDateString = request.getParameter("leaveDate");
@@ -412,36 +408,36 @@ public class LeaveControllerImpl implements LeaveController {
 			SessionFactory sf = cfg.buildSessionFactory();
 			Session session = sf.openSession();
 			Transaction tr = session.beginTransaction();
-			
+
 			// Get leave to update
 			String hql = "FROM LeaveBean u where u.empID=:empID and leaveDate=:leaveDate";
 			Query query = session.createQuery(hql);
 			query.setParameter("empID", empID);
 			query.setParameter("leaveDate", LocalDate.parse(leaveDateString));
 			leave = (LeaveBean) query.getSingleResult();
-			
-			if(leave==null){
+
+			if (leave == null) {
 				throw new NullPointerException("Unable to fetch leave to update.");
 			}
-			
-			//update leave
+
+			// update leave
 			leave.setLeaveStatus(leaveStatus);
 			leave.setSupervisorComment(comment);
-			
-			//save updated leave in DB
+
+			// save updated leave in DB
 			session.save(leave);
 			tr.commit();
-			
+
 			resStatus = "Success";
 			resMess = "Leave successfully Updated!";
-		}catch(Exception e){
+		} catch (Exception e) {
 			resStatus = "Error";
 			resMess = ExceptionUtils.getRootCauseMessage(e);
 		}
-		
+
 		resModel.setStatus(resStatus);
 		resModel.setMessage(resMess);
-		
+
 		String jsonString = new Gson().toJson(resModel);
 
 		// TODO Auto-generated method stub

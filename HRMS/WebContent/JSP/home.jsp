@@ -31,7 +31,7 @@
 				</c:when>
 				<c:when test="${sessionScope.isSysAdmin=='TRUE'}">
 					<div class="leftMenuItems menuItems"
-						onclick="window.location='adminRegisterView.do'">Register New User</div>
+						onclick="window.location='employee/adminRegisterView.do'">Register New User</div>
 				</c:when>
 				<c:when test="${sessionScope.isLeaveApplierAndApprover=='TRUE'}">
 					<div class="leftMenuItems menuItems"

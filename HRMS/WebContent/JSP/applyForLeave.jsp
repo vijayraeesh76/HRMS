@@ -33,9 +33,9 @@
 				Status</div>
 		</div>
 		<div id="rightMenu">
-			<div class="rightMenuItems menuItems" onclick="window.location='signOut.do'">Sign
+			<div class="rightMenuItems menuItems" onclick="window.location='/HRMS/signOut.do'">Sign
 				Out</div>
-			<div class="rightMenuItems menuItems" onclick="window.location='home'">Home</div>
+			<div class="rightMenuItems menuItems" onclick="window.location='/HRMS/home'">Home</div>
 		</div>
 	</div>
 

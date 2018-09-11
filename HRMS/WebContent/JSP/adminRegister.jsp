@@ -28,7 +28,7 @@
 				New User</div>
 		</div>
 		<div id="rightMenu">
-			<div class="rightMenuItems" onclick="window.location='signOut.do'">Sign
+			<div class="rightMenuItems" onclick="window.location='/HRMS/signOut.do'">Sign
 				Out</div>
 			<div class="rightMenuItems">Hi ${sessionScope.firstName}</div>
 		</div>

@@ -7,7 +7,7 @@ $(document).ready(function() {
 			return
 		}
 		
-		$.post("assignHierarchyFlow.do", {
+		$.post("employee/assignHierarchyFlow.do", {
 			projectId:projectId
 		}, function(data) {
 			var obj = jQuery.parseJSON(data);
@@ -42,7 +42,7 @@ $(document).ready(function() {
 			return
 		}
 		
-		$.post("assignHierarchyFlow.do", {
+		$.post("employee/assignHierarchyFlow.do", {
 			projectId:projectId,
 			designation:designation
 		}, function(data) {

@@ -1,10 +1,13 @@
-package com.hrms.controller.admin;
+package com.hrms.controller.employee;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -12,17 +15,31 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.hrms.manager.employee.EmployeeManager;
 import com.hrms.model.Employee;
+import com.hrms.model.ResponseModel;
 import com.hrms.utilities.HashPassword;
 
-@Controller
-public class AdminControllerImpl implements AdminController{
+@RequestMapping("/employee")
+public class EmployeeControllerImpl implements EmployeeController{
 	
+	private EmployeeManager employeeManager;
+	
+	public EmployeeManager getEmployeeManager() {
+		return employeeManager;
+	}
+
+	public void setEmployeeManager(EmployeeManager employeeManager) {
+		this.employeeManager = employeeManager;
+	}
+
 	@Override
 	@RequestMapping("/adminRegister.do")
 	public ModelAndView adminRegister(Employee employee) throws IOException{
@@ -92,8 +109,11 @@ public class AdminControllerImpl implements AdminController{
 			user.setEmpID("DC_"+employeeCount);
 			user.setSalt(saltHash);
 			
-			session.save(user);
-			tr.commit();
+			// save employee
+			employeeManager.saveEmployee(user);
+			
+			//session.save(user);
+			//tr.commit();
 			
 			//status = "Success";
 		}catch(Exception e) {
@@ -120,5 +140,85 @@ public class AdminControllerImpl implements AdminController{
 	public ModelAndView adminRegisterView(@ModelAttribute("employee") Employee employee) throws IOException {
 		ModelAndView model = new ModelAndView("adminRegister");
 		return model;
+	}
+	
+	@RequestMapping("/assignHierarchyFlow.do")
+	@Override
+	public ResponseEntity getDesignationsAndEmployees(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		ResponseModel resModel = new ResponseModel();
+		String resStatus = null;
+		String resMess = null;
+
+		try {
+			String projectId = request.getParameter("projectId");
+			String designation = request.getParameter("designation");
+
+			if (StringUtils.isBlank(projectId)) {
+				throw new RuntimeException("No projectId selected");
+			}
+			
+			List<String> designations = null;
+			List<Employee> designatedEmployees = null;
+
+			// Hibernate Configurations
+			Configuration cfg = new Configuration();
+			cfg = cfg.configure();
+			SessionFactory sf = cfg.buildSessionFactory();
+			Session session = sf.openSession();
+			Transaction tr = session.beginTransaction();
+
+			// Fetch designations if designation is blank
+			if (StringUtils.isBlank(designation)) {
+				
+				
+				// Get Employees in Project
+				
+				
+				/*String hql = "SELECT DISTINCT e.designation FROM Employee e where e.project.id=:projectId";
+				Query query = session.createQuery(hql);
+				query.setParameter("projectId", Integer.parseInt(projectId));*/
+				designations = employeeManager.getDistinctDesignationInProject(projectId);
+				
+				resModel.setModelList(designations);
+			}
+			// Fetch relevant employees and subordinates if designation is not blank
+			else {
+				
+				String deHql = "FROM Employee e where e.project.id=:projectId and e.designation=:designation";
+				Query deQuery = session.createQuery(deHql);
+				deQuery.setParameter("projectId", Integer.parseInt(projectId));
+				deQuery.setParameter("designation", designation);
+				designatedEmployees = (List<Employee>) deQuery.getResultList();
+				
+				if(designatedEmployees == null || designatedEmployees.isEmpty()){
+					throw new RuntimeException("No employees in selected designation");
+				}
+				
+				// To avoid cyclic reference in GSON
+				for(Employee e : designatedEmployees){
+					e.setProject(null);
+					e.setSuperiors(null);
+					e.setSubordinates(null);
+					/*session.buildLockRequest(LockOptions.NONE).lock(e);*/
+				}
+				
+				resModel.setModelList(designatedEmployees);
+			}
+
+			resStatus = "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			resStatus = "Error";
+			resMess = ExceptionUtils.getRootCauseMessage(e);
+		}
+
+		// Prepare response
+		resModel.setStatus(resStatus);
+		resModel.setMessage(resMess);
+		String jsonString = new Gson().toJson(resModel);
+		
+		
+		return ResponseEntity.ok(jsonString);
 	}
 }

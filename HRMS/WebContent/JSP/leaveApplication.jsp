@@ -20,16 +20,16 @@
 
 	<div id="menu">
 		<div id="leftMenu">
-			<div class="leftMenuItems menuItems" onclick="window.location='applyForLeave.do'">
+			<div class="leftMenuItems menuItems" onclick="window.location='leave/applyForLeave.do'">
 				Apply For Leave</div>
 			<div class="leftMenuItems menuItems"
 				onclick="window.location='employeeLeaveStatus.do'">Leave
 				Status</div>
 		</div>
 		<div id="rightMenu">
-			<div class="rightMenuItems menuItems" onclick="window.location='signOut.do'">Sign
+			<div class="rightMenuItems menuItems" onclick="window.location='/HRMS/signOut.do'">Sign
 				Out</div>
-			<div class="rightMenuItems menuItems" onclick="window.location='home'">Home</div>
+			<div class="rightMenuItems menuItems" onclick="window.location='/HRMS/home'">Home</div>
 		</div>
 	</div>
 </body>

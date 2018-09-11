@@ -1,4 +1,4 @@
-package com.hrms.controller.admin;
+package com.hrms.controller.employee;
 
 import java.io.IOException;
 
@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.model.Employee;
 
-public interface AdminController {
+public interface EmployeeController {
 	public ModelAndView adminRegister(Employee employee) throws IOException;
-	public ModelAndView adminRegisterView(Employee employee) throws IOException;;
+	public ModelAndView adminRegisterView(Employee employee) throws IOException;
+	ResponseEntity getDesignationsAndEmployees(HttpServletRequest request, HttpServletResponse response)
+			throws IOException;;
 }

@@ -2,14 +2,41 @@ package com.hrms.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.transaction.Transactional;
+
+@Entity
+@Table(name="leave_table")
 public class LeaveBean {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="User_Name")
 	private String userName;
+	
+	@Column(name="Emp_ID")
 	private String empID;
+	
+	@Column(name="Leave_Date")
 	private LocalDate leaveDate;
+	
+	@Column(name="Leave_Status")
 	private String leaveStatus;
+	
+	@Column(name="Reason")
 	private String reason;
+	
+	@Column(name="Superior_Emp_Id")
 	private String superiorEmpID;
+	
+	@Column(name="Supervisor_Comment")
 	private String supervisorComment;
 
 	public String getSupervisorComment() {
