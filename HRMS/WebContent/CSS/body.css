@@ -3,3 +3,8 @@ body{
 	font-family:Arial;
 	font-weight: bold;
 }
+
+.err {
+	font-weight: lighter;
+	color:red;
+}

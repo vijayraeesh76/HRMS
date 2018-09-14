@@ -11,6 +11,10 @@ public interface LeaveManager {
 
 	List<LeaveBean> getLeavesByEmpIDAndLeaveDate(String empID, LocalDate fDate);
 
-	List<LeaveBean> getLeavesByEmpIDAndLeaveDateRange(String empID, LocalDate fDate, LocalDate tDate);	
+	List<LeaveBean> getLeavesByEmpIDAndLeaveDateRange(String empID, LocalDate fDate, LocalDate tDate);
+
+	LeaveBean getLeaveByEmpIDAndLeaveDate(String empID, LocalDate parse);
+
+	void updateLeave(LeaveBean leave);	
 	
 }

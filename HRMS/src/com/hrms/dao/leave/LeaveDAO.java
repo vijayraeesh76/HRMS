@@ -13,4 +13,6 @@ public interface LeaveDAO {
 
 	List<LeaveBean> getLeavesByEmpIDAndLeaveDateRange(String empID, LocalDate fDate, LocalDate tDate);
 
+	void updateLeave(LeaveBean leave);
+
 }

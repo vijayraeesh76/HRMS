@@ -23,7 +23,7 @@
 			<div class="leftMenuItems menuItems" onclick="window.location='leave/applyForLeave.do'">
 				Apply For Leave</div>
 			<div class="leftMenuItems menuItems"
-				onclick="window.location='employeeLeaveStatus.do'">Leave
+				onclick="window.location='leave/employeeLeaveStatus.do'">Leave
 				Status</div>
 		</div>
 		<div id="rightMenu">

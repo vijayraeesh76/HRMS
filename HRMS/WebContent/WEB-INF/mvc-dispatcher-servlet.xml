@@ -3,19 +3,24 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://www.springframework.org/schema/tx 
-  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-    
-    
-    <import resource="Datasource-bean.xml" />
-    <import resource="Employee-beans.xml" />
-    <import resource="Hibernate-Datasource-bean.xml" />
-    <import resource="Leave-beans.xml" />
-    
+  	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+  	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<import resource="Datasource-bean.xml" />
+	<import resource="Employee-beans.xml" />
+	<import resource="Hibernate-Datasource-bean.xml" />
+	<import resource="Leave-beans.xml" />
+	<import resource="Validator.xml" />
+
+	<mvc:annotation-driven validator="globalValidator"/>
 	<context:annotation-config />
 	<context:component-scan
 		base-package="com.hrms.controller" />
@@ -25,7 +30,8 @@
 		<property name="prefix" value="/JSP/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<tx:annotation-driven transaction-manager="txManager" />
+
+	<tx:annotation-driven
+		transaction-manager="txManager" />
 </beans>
 

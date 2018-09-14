@@ -3,6 +3,10 @@ package com.hrms.dao.leave;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +47,11 @@ public class LeaveDAOImpl implements LeaveDAO {
 		Object[] paramValues = { empID, fDate, tDate };
 
 		return (List<LeaveBean>) hibernateTemplate.findByNamedParam(hql, paramNames, paramValues);
+	}
+
+	@Override
+	public void updateLeave(LeaveBean leave) {
+		hibernateTemplate.update(leave);
 	}
 
 }

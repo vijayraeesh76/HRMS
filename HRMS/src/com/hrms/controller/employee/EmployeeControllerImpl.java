@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -16,7 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,9 +43,15 @@ public class EmployeeControllerImpl implements EmployeeController{
 
 	@Override
 	@RequestMapping("/adminRegister.do")
-	public ModelAndView adminRegister(Employee employee) throws IOException{
+	public ModelAndView adminRegister(@Valid Employee employee, Errors errors) throws IOException{
 
 		ModelAndView model = new ModelAndView();
+		
+		if(errors.hasErrors()) {
+			model.setViewName("adminRegister");
+			
+			return model;
+		}
 		
 		// AJAX
 		/*ResponseModel responseStatus = new ResponseModel();

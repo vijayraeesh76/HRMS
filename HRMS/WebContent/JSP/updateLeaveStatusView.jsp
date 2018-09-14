@@ -26,10 +26,10 @@
 	</div>
 	<div id="menu">
 		<div id="leftMenu">
-			<div class="leftMenuItems menuItems" onclick="window.location='leaveManagementView'">Back</div>
+			<div class="leftMenuItems menuItems" onclick="window.location='/HRMS/leaveManagementView'">Back</div>
 		</div>
 		<div id="rightMenu">
-			<div class="rightMenuItems menuItems" onclick="window.location='signOut.do'">Sign
+			<div class="rightMenuItems menuItems" onclick="window.location='/HRMS/signOut.do'">Sign
 				Out</div>
 			<div class="rightMenuItems menuItems">Hi ${sessionScope.firstName}</div>
 		</div>

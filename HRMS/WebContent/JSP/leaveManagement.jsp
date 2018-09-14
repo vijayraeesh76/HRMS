@@ -22,7 +22,7 @@
 	<div id="menu">
 		<div id="leftMenu">
 			<div class="leftMenuItems menuItems"
-				onclick="window.location='updateLeaveStatusView.do'">Update
+				onclick="window.location='leave/updateLeaveStatusView.do'">Update
 				Leave's Status</div>
 			<div class="leftMenuItems menuItems"
 				onclick="window.location='leaveApplication'">Leave Application</div>

@@ -30,7 +30,7 @@
 		<!-- List of XML mapping files -->
 		<mapping resource="com/hrms/model/Employee.hbm.xml" />
 		<mapping resource="com/hrms/model/Customer.hbm.xml" />
-		<!-- <mapping resource="com/hrms/model/Leave.hbm.xml" /> -->
+		<mapping resource="com/hrms/model/Leave.hbm.xml" />
 		<mapping resource="com/hrms/model/PunchTime.hbm.xml" />
 		<mapping resource="com/hrms/model/PunchRecord.hbm.xml" />
 		<mapping resource="com/hrms/model/Attendance.hbm.xml" />

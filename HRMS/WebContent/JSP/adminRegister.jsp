@@ -24,7 +24,7 @@
 	</div>
 	<div id="menu">
 		<div id="leftMenu">
-			<div class="leftMenuItems" onclick="window.location='adminRegister'">Register
+			<div class="leftMenuItems" onclick="window.location='adminRegisterView.do'">Register
 				New User</div>
 		</div>
 		<div id="rightMenu">
@@ -43,6 +43,7 @@
 				<div class="textInputDiv contentSecondChildb">
 					<form:input id="firstname" type="text" class="textInput"
 						placeholder="Firstname" path="firstName"></form:input>
+						<form:errors path="firstName" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<div id="lastnameDiv" class="registerDivs contentFirstChild">
@@ -52,6 +53,7 @@
 				<div class="textInputDiv contentSecondChildb">
 					<form:input id="lastname" type="text" class="textInput"
 						placeholder="Lastname" path="lastName"></form:input>
+						<form:errors path="lastName" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<div id="employeeTypeDiv" class="registerDivs contentFirstChild">
@@ -67,6 +69,7 @@
 						<option value="SOFTWARE_ENGINEER">SOFTWARE ENGINEER</option>
 						<option value="TRAINEE">TRAINEE</option>
 					</form:select>
+					<form:errors path="designation" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<div id="dojDiv" class="registerDivs contentFirstChild">
@@ -75,6 +78,7 @@
 				</div>
 				<div class="textInputDiv contentSecondChildb">
 					<form:input type="date" id="datePicker" path="dojString"/>
+					<form:errors path="dojString" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<div id="userNameDiv" class="registerDivs contentFirstChild">
@@ -84,6 +88,7 @@
 				<div class="textInputDiv contentSecondChildb">
 					<form:input id="username" type="text" class="textInput"
 						placeholder="Username" path="userName"/>
+						<form:errors path="userName" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<div id="passwordDiv" class="registerDivs contentFirstChild">
@@ -93,6 +98,7 @@
 				<div class="textInputDiv contentSecondChildb">
 					<form:input id="password" type="password" class="textInput"
 						placeholder="Password" path="password"/>
+						<form:errors path="password" cssClass="err"></form:errors>
 				</div>
 			</div>
 			<hr>

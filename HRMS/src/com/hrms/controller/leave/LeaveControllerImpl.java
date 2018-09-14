@@ -403,18 +403,8 @@ public class LeaveControllerImpl implements LeaveController {
 			Employee employee = null;
 			LeaveBean leave = null;
 
-			Configuration cfg = new Configuration();
-			cfg = cfg.configure();
-			SessionFactory sf = cfg.buildSessionFactory();
-			Session session = sf.openSession();
-			Transaction tr = session.beginTransaction();
-
 			// Get leave to update
-			String hql = "FROM LeaveBean u where u.empID=:empID and leaveDate=:leaveDate";
-			Query query = session.createQuery(hql);
-			query.setParameter("empID", empID);
-			query.setParameter("leaveDate", LocalDate.parse(leaveDateString));
-			leave = (LeaveBean) query.getSingleResult();
+			leave = leaveManager.getLeaveByEmpIDAndLeaveDate(empID, LocalDate.parse(leaveDateString));
 
 			if (leave == null) {
 				throw new NullPointerException("Unable to fetch leave to update.");
@@ -425,8 +415,7 @@ public class LeaveControllerImpl implements LeaveController {
 			leave.setSupervisorComment(comment);
 
 			// save updated leave in DB
-			session.save(leave);
-			tr.commit();
+			leaveManager.updateLeave(leave);
 
 			resStatus = "Success";
 			resMess = "Leave successfully Updated!";
